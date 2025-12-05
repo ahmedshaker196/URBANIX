@@ -1,0 +1,93 @@
+
+.contactUs{
+     margin-bottom: 40px;
+}
+.f-title{
+    color: #7b2e11;
+}
+
+.contactUs .row.overflow-hidden{
+    border-radius: 10px;
+    box-shadow: 2px 5px 18px gray;
+}
+.contactUs-form label{
+    font-size: 0.875rem;
+    font-weight: 600;
+
+}
+
+.form-roww{
+    border: 1px solid rgb(204, 203, 203);
+    overflow: hidden;
+    border-radius: 50px;
+    background-color: #7b2e11;
+}
+
+.contactUs-form input,
+select,
+textarea{
+    background-color: rgb(246, 246, 246);
+    transition: var(--trans);
+}
+
+.contactUs-form input:focus,
+.contactUs-form select:focus,
+.contactUs-form textarea:focus {
+    border: 2px;
+  border-color: var(--c-orange) !important;  
+  box-shadow: 0 0 5px rgba(248, 106, 54, 0.4) !important; 
+  outline: none !important;
+  transform: translateY(-3px);
+}
+
+.form-3-div:focus {
+    border: 2px;
+  border-color: var(--c-orange) !important; 
+  background-color: var(--bg-orange);
+  color: var(--c-orange); 
+  box-shadow: 0 0 5px rgba(248, 106, 54, 0.4) !important; 
+  outline: none !important;
+  transform: translateY(-3px);
+  p.fw-bold{
+    color: var(--c-orange);
+  }
+}
+
+.form-3-div {
+  cursor: pointer;
+  transition: 0.3s;
+}
+ 
+.sm-word{
+    color: gray;
+}
+
+.contactUs-form button{
+    background:linear-gradient(to right, #e6560d , #c5440d ,#f88e3a); ;
+}
+
+
+.contact-section {
+  color: #fff;
+}
+
+.icon-box {
+  width: 80px;
+  height: 50px;
+  background-color:#f06b24;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+
+}
+
+.r-form{
+    background-color: #b63e07;
+    color: white;
+}
+
+.para-form{
+    color: rgb(240, 198, 198);
+}
+

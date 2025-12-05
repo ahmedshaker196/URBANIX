@@ -1,0 +1,275 @@
+
+/* ----Page Admin--------------- */
+
+
+*{padding:0;margin:0;}
+:root{
+  --whiteColor: #F1F1F1 ;
+  --whiteColor2:#cac9c9;
+  --yellow: #ecf322 ;
+  --black-bg : #0B0E13 ;
+  --text-dark: rgba(11,14,19,0.9);
+  --muted: rgba(11,14,19,0.55);
+   --accent-orange:#ff8c33;
+}
+body{
+  
+    display: flex;
+    
+    
+}
+
+
+:root{
+    --white: #FFFFFF;
+    --light-gray: #F7F7F7;
+    --soft-gray: #E0E0E0;
+    --text-dark: #333333;
+    --black:#0B0E13;
+    --pink: #FF4F8B;
+    --blue: #3A7AFE;
+    --yellow: #FFD369;
+    --orange:#b63f07;
+    --trans:all 0.3s ease ;
+}
+
+body{
+    color: var(--text-dark);
+    background-color: var(--white);
+    padding-top: 40px;
+}
+
+
+p{
+    color: var(--text-dark);
+    line-height: 1.6;
+}
+
+
+
+h1,h2,h3{
+    font-family:'Times New Roman', Times, serif;
+    color: var(--text-dark);
+    font-weight: 600;
+    transition: var(--trans);
+}
+
+/* Navbar */
+.navbar{
+    background-color: var(--white);
+    z-index: 1000;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.logo{
+    font-weight: 700;
+    color: var(--black);
+    text-shadow: 1px 1px 17px var(--orange);
+}
+
+.nav-link{
+    color: var(--text-dark);
+    font-weight: 400;
+    margin-right: 1rem;
+    font-size: 0.9375rem;
+}
+.nav-link:hover ,
+.nav-icon:hover{
+    color: var(--black);
+    cursor: pointer;
+}
+
+.nav-icon{
+    color: var(--text-dark);
+}
+
+.btn{
+    color: var(--black);
+    background-color: var(--orange);
+    position: relative;
+    overflow: hidden;
+    font-weight: bold;
+}
+.btn:hover{
+      background-color: rgb(205, 74, 9);
+    color: var(--text-dark);
+}
+.btn::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;  
+    width: 1rem;
+    height: 100%;
+    background: rgba(255,255,255,0.6);
+    box-shadow: 1px 1px 5px rgba(255,255,255,0.4);
+}
+.btn:hover::after {
+    animation: shine .5s linear;
+}
+@keyframes shine {
+    to { left: 120%; }
+}
+
+
+
+.img-box{
+  width:50px;
+  height: 50px;
+  border-radius: 50%;
+  overflow: hidden;
+  border:3px solid white;
+  flex-shrink: 0;
+}
+.img-box img{
+  width: 100%;
+  
+}
+.profile {
+  display: flex;
+  align-items: center;
+  gap:30px
+}
+.profile h2{
+  font-size: 20px;
+  text-transform: capitalize;
+  color:white
+}
+.menu{
+  background-color:var(--black-bg);
+  width:90px;
+  height: 100vh;
+  padding:20px;
+  overflow: hidden;
+  transition: 0.5s;
+
+}
+.menu:hover{
+  width: 260px;
+}
+
+.menu ul {
+  list-style: none;
+  position: relative;
+  height: 95%;
+}
+.menu ul li a{
+  display:block ;
+  text-decoration: none;
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  gap:40px;
+  transition: 0.5s;
+  color:white
+}
+.menu ul li a:hover ,.active ,.data-info .box:hover , td:hover,.title-info:hover{
+  background-color: var(--accent-orange);
+
+
+}
+.menu .log-out{
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  
+}
+
+.menu .log-out a{
+  background-color:var(--whiteColor2);
+  color:white;
+ 
+  
+
+}
+.menu .log-out a:hover{
+  background-color:var(--accent-orange);
+}
+
+.menu ul li a i ,.content i{
+  color:var(--whiteColor);
+  font-size: 20px;
+  font-size: 25px;
+}
+.content{
+    width:100%;
+    margin: 10px;
+
+}
+.title-info{
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 8px;
+    margin:10px 0;
+    background-color: var(--whiteColor2);
+    color:rgb(10, 10, 10);
+    font-size: larger;
+
+}
+.data-info{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap:10px;
+
+}
+.data-info .box{
+
+    background-color: var(--black-bg);
+    height: 150px;
+    flex-basis: 150px;
+    flex-grow: 1;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    color:white;
+
+
+}
+.data-info .box i{
+    font-size: 30px;
+}
+.data-info .box .data{
+    text-align: center;
+}
+.data-info .box .data span{
+    font-size: 30px;
+}
+table{
+    width:100%;
+
+    text-align: center;
+    border-spacing: 8px;
+ 
+    
+    
+}
+td,th{
+    background-color: var(--whiteColor2);
+    height: 40px;
+    border-radius: 5px;
+    border: 0px solid var(--muted);
+    
+    
+    
+
+}
+th{
+    background-color: var(--black-bg);
+    margin-bottom: 10px;
+    color:white;
+     border: 1px solid white;
+    
+}
+tr{margin-left: 5px;}
+.price,.count{
+    padding: 6px;
+    border-radius: 6px;
+    
+}
