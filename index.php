@@ -14,7 +14,7 @@
 <body>
    
     <main>
-<form action="about.html" class="col-lg-5">
+<form action="about.php" class="col-lg-5">
 
     <h1 class="fw-bolder">Login</h1>
     <br>
