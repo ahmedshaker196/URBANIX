@@ -5,20 +5,20 @@ require_once 'config/db.php';
 $user_result = $conn->query("SELECT COUNT(*) AS total_users FROM users");
 $user_count = $user_result->fetch_assoc()['total_users'];
 //count of posts
-//$post_result = $conn->query("SELECT COUNT(*) AS total_posts FROM posts");
-//$post_count = $post_result->fetch_assoc()['total_posts'];
+ $post_result = $conn->query("SELECT COUNT(*) AS total_posts FROM contact_messages");
+ $post_count = $post_result->fetch_assoc()['total_posts'];
 //count of products
 $product_result_count = $conn->query("SELECT COUNT(*) AS total_products FROM products");
 $product_count = $product_result_count->fetch_assoc()['total_products'];
 //count of total_revenue
-$revenue_result = $conn->query("SELECT SUM(total_price - discount) AS total_revenue FROM orders");
+$revenue_result = $conn->query("SELECT SUM(total_price * (1 - discount / 100)) AS total_revenue FROM orders");
 $revenue = $revenue_result->fetch_assoc()['total_revenue'] ?? 0;
 
 
 $result = $conn->query("
-    SELECT product_id, name, price, stock
-    FROM products 
-    ORDER BY product_id ASC
+    SELECT user_id, name, username, email
+    FROM users 
+    ORDER BY user_id ASC
 ");
 ?>
 
@@ -198,8 +198,8 @@ table th {
         <li class="nav-item"><a class="nav-link me-2" href="cart.html">CART</a></li>
         <li class="nav-item"><a class="nav-link" href="contact.php">CONTACT US</a></li>
       </ul>
-      <form class="d-flex me-2" action="index.html">
-        <a class="mt-1" href="admin.html">
+      <form class="d-flex me-2" action="index.php">
+        <a class="mt-1" href="admin.php">
             <i class="fa-regular fa-user align-self-center nav-icon me-4"></i>
         </a>
         <i class="fa-solid fa-cart-shopping align-self-center nav-icon me-3"></i>
@@ -285,7 +285,7 @@ table th {
             <i class="fa-solid fa-pen"></i>
             <div class="data">
                 <p>posts</p>
-                <span>590</span>
+                <span><?= $post_count  ?></span>
             </div>
         </div>
         <div class="box">
@@ -311,22 +311,20 @@ table th {
     <table>
         <thead>
             <tr>
-                <th>product</th>
-                <th>price</th>
-                <th>count</th>
-                <th>actions</th>
+                <th>user_id</th>
+                <th>name</th>
+                <th>user_name</th>
+                <th>email</th>
             </tr>
         </thead>
         <tbody>
             <?php while($row = $result->fetch_assoc()): ?>
             <tr>
-                <td><?= $row['name'] ?></td>
-                <td><span class="price">$<?= number_format($row['price'], 2) ?></span></td>
-                <td><span class="count"><?= $row['stock'] ?></span></td>
-                <td>
-                    <a href="edit_product.php?id=<?= $row['product_id'] ?>" class="btn-edit">Edit</a>
-                    <a href="delete_product.php?id=<?= $row['product_id'] ?>" class="btn-del">Delete</a>
-                </td>
+                <td><?= $row['user_id'] ?></td>
+                <td><span class="price">$<?= $row['name'] ?></span></td>
+                <td><span class="count"><?= $row['username'] ?></span></td>
+                <td><span class="count"><?= $row['email'] ?></span></td>
+                
             </tr>
             <?php endwhile; ?>
         </tbody>

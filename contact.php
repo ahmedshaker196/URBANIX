@@ -64,7 +64,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <li class="nav-item"><a class="nav-link me-2" href="cart.html">CART</a></li>
         <li class="nav-item"><a class="nav-link" href="contact.php">CONTACT US</a></li>
       </ul>
-      <form class="d-flex me-2" action="index.html">
+      <form class="d-flex me-2" action="index.php">
         <a class="mt-1" href="admin.php"><i class="fa-regular fa-user nav-icon me-4"></i></a>
         <i class="fa-solid fa-cart-shopping nav-icon me-3"></i>
         <button class="btn nav-btn fw-bold px-3" type="submit">Logout</button>

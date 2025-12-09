@@ -63,8 +63,8 @@ table th { background: #f5f5f5; font-weight: bold; }
         <li class="nav-item"><a class="nav-link me-2" href="fetch_cart.php">CART</a></li>
         <li class="nav-item"><a class="nav-link" href="contact.php">CONTACT US</a></li>
       </ul>
-      <form class="d-flex me-2" action="index.html">
-        <a class="mt-1" href="admin.html">
+      <form class="d-flex me-2" action="index.php">
+        <a class="mt-1" href="admin.php">
             <i class="fa-regular fa-user align-self-center nav-icon me-4"></i>
         </a>
         <i class="fa-solid fa-cart-shopping align-self-center nav-icon me-3"></i>
@@ -89,7 +89,7 @@ table th { background: #f5f5f5; font-weight: bold; }
         <li><a href="#"><i class="fa-solid fa-pen"></i><p>posts</p></a></li>
         <li><a href="#"><i class="fa-regular fa-star"></i><p>favorite</p></a></li>
         <li><a href="#"><i class="fa-solid fa-gear"></i><p>setting</p></a></li>
-        <li class="log-out"><a href="#"><i class="fa-solid fa-arrow-right-from-bracket"></i><p>Log out</p></a></li>
+        <li class="log-out"><a href="logout.php"><i class="fa-solid fa-arrow-right-from-bracket"></i><p>Log out</p></a></li>
     </ul>
 </div>
 

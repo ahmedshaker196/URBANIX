@@ -4,13 +4,13 @@ require_once 'config/db.php';
 $user_result = $conn->query("SELECT COUNT(*) AS total_users FROM users");
 $user_count = $user_result->fetch_assoc()['total_users'];
 //count of posts
-//$post_result = $conn->query("SELECT COUNT(*) AS total_posts FROM posts");
-//$post_count = $post_result->fetch_assoc()['total_posts'];
+ $post_result = $conn->query("SELECT COUNT(*) AS total_posts FROM contact_messages");
+$post_count = $post_result->fetch_assoc()['total_posts'];
 //count of products
 $product_result_count = $conn->query("SELECT COUNT(*) AS total_products FROM products");
 $product_count = $product_result_count->fetch_assoc()['total_products'];
 //count of total_revenue
-$revenue_result = $conn->query("SELECT SUM(total_price - discount) AS total_revenue FROM orders");
+$revenue_result = $conn->query("SELECT SUM(total_price * (1 - discount / 100)) AS total_revenue FROM orders");
 $revenue = $revenue_result->fetch_assoc()['total_revenue'] ?? 0;
 
 
@@ -57,7 +57,7 @@ $result = $conn->query("
           <a class="nav-link me-2" href="products.html">PRODUCTS</a>
         </li>
          <li class="nav-item">
-          <a class="nav-link me-2" href="about.html">ABOUT</a>
+          <a class="nav-link me-2" href="about.php">ABOUT</a>
         </li>
           <li class="nav-item">
           <a class="nav-link me-2" href="cart.html">CART</a>
@@ -67,8 +67,8 @@ $result = $conn->query("
         </li>
 
       </ul>
-      <form class="d-flex me-2" action="index.html">
-        <a class="mt-1" href="admin.html">
+      <form class="d-flex me-2" action="logout.php">
+        <a class="mt-1" href="admin.php">
   <i class="fa-regular fa-user align-self-center nav-icon me-4"></i>
 </a>
         <i class="fa-solid fa-cart-shopping align-self-center nav-icon me-3"></i>
@@ -158,7 +158,7 @@ $result = $conn->query("
                    <i class="fa-solid fa-pen"></i>
                   <div class="data">
                     <p>posts</p>
-                    <span>50</span>
+                    <span><?= $post_count ?></span>
                   </div> </div>
                      <div class="box">
                   <i class="fa-solid fa-table"></i>
