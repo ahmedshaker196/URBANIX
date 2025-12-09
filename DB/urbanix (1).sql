@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.2
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost:3306
--- Generation Time: Dec 09, 2025 at 12:10 AM
--- Server version: 8.4.3
--- PHP Version: 8.3.26
+-- Host: 127.0.0.1
+-- Generation Time: Dec 09, 2025 at 08:16 PM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -28,8 +28,8 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `cart` (
-  `cart_id` int NOT NULL,
-  `user_id` int NOT NULL,
+  `cart_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
   `created_at` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -48,11 +48,11 @@ INSERT INTO `cart` (`cart_id`, `user_id`, `created_at`) VALUES
 --
 
 CREATE TABLE `cart_items` (
-  `item_id` int NOT NULL,
-  `cart_id` int NOT NULL,
-  `product_id` int NOT NULL,
-  `color_id` int NOT NULL,
-  `quantity` int NOT NULL,
+  `item_id` int(11) NOT NULL,
+  `cart_id` int(11) NOT NULL,
+  `product_id` int(11) NOT NULL,
+  `color_id` int(11) NOT NULL,
+  `quantity` int(11) NOT NULL,
   `price_at_time` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -63,9 +63,9 @@ CREATE TABLE `cart_items` (
 --
 
 CREATE TABLE `categories` (
-  `category_id` int NOT NULL,
-  `category_name` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
-  `description` text COLLATE utf8mb4_general_ci NOT NULL
+  `category_id` int(11) NOT NULL,
+  `category_name` varchar(100) NOT NULL,
+  `description` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -82,16 +82,16 @@ INSERT INTO `categories` (`category_id`, `category_name`, `description`) VALUES
 --
 
 CREATE TABLE `contact_messages` (
-  `message_id` int NOT NULL,
-  `first_name` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
-  `last_name` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
-  `email` varchar(150) COLLATE utf8mb4_general_ci NOT NULL,
-  `city` varchar(100) COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `interest` varchar(100) COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `timeline` varchar(100) COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `message` text COLLATE utf8mb4_general_ci,
-  `agree_marketing` tinyint(1) NOT NULL DEFAULT '0',
-  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `message_id` int(11) NOT NULL,
+  `first_name` varchar(100) NOT NULL,
+  `last_name` varchar(100) NOT NULL,
+  `email` varchar(150) NOT NULL,
+  `city` varchar(100) DEFAULT NULL,
+  `interest` varchar(100) DEFAULT NULL,
+  `timeline` varchar(100) DEFAULT NULL,
+  `message` text DEFAULT NULL,
+  `agree_marketing` tinyint(1) NOT NULL DEFAULT 0,
+  `created_at` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -109,11 +109,11 @@ INSERT INTO `contact_messages` (`message_id`, `first_name`, `last_name`, `email`
 --
 
 CREATE TABLE `orders` (
-  `order_id` int NOT NULL,
-  `user_id` int NOT NULL,
+  `order_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
   `total_price` decimal(10,0) NOT NULL,
   `discount` decimal(10,0) NOT NULL,
-  `status` varchar(20) COLLATE utf8mb4_general_ci NOT NULL,
+  `status` varchar(20) NOT NULL,
   `created_at` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -132,11 +132,11 @@ INSERT INTO `orders` (`order_id`, `user_id`, `total_price`, `discount`, `status`
 --
 
 CREATE TABLE `order_items` (
-  `order_item_id` int NOT NULL,
-  `order_id` int NOT NULL,
-  `product_id` int NOT NULL,
-  `color_id` int NOT NULL,
-  `quantity` int NOT NULL,
+  `order_item_id` int(11) NOT NULL,
+  `order_id` int(11) NOT NULL,
+  `product_id` int(11) NOT NULL,
+  `color_id` int(11) NOT NULL,
+  `quantity` int(11) NOT NULL,
   `price` decimal(10,0) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -147,22 +147,23 @@ CREATE TABLE `order_items` (
 --
 
 CREATE TABLE `products` (
-  `product_id` int NOT NULL,
-  `name` varchar(150) COLLATE utf8mb4_general_ci NOT NULL,
-  `description` text COLLATE utf8mb4_general_ci NOT NULL,
+  `product_id` int(11) NOT NULL,
+  `name` varchar(150) NOT NULL,
+  `description` text NOT NULL,
   `price` decimal(10,0) NOT NULL,
-  `stock` int NOT NULL,
-  `category_id` int NOT NULL,
+  `stock` int(11) NOT NULL,
+  `category_id` int(11) NOT NULL,
   `is_new` tinyint(1) NOT NULL,
-  `created_at` datetime NOT NULL
+  `created_at` datetime NOT NULL,
+  `image` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `products`
 --
 
-INSERT INTO `products` (`product_id`, `name`, `description`, `price`, `stock`, `category_id`, `is_new`, `created_at`) VALUES
-(1, 'T-shir', 'Beautiful', 1500, 6, 1, 1, '2025-12-09 00:05:16');
+INSERT INTO `products` (`product_id`, `name`, `description`, `price`, `stock`, `category_id`, `is_new`, `created_at`, `image`) VALUES
+(1, 'T-shir', 'Beautiful', 1500, 6, 1, 1, '2025-12-09 00:05:16', NULL);
 
 -- --------------------------------------------------------
 
@@ -171,10 +172,10 @@ INSERT INTO `products` (`product_id`, `name`, `description`, `price`, `stock`, `
 --
 
 CREATE TABLE `product_colors` (
-  `color_id` int NOT NULL,
-  `product_id` int NOT NULL,
-  `color_name` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
-  `color_hex` varchar(10) COLLATE utf8mb4_general_ci NOT NULL
+  `color_id` int(11) NOT NULL,
+  `product_id` int(11) NOT NULL,
+  `color_name` varchar(50) NOT NULL,
+  `color_hex` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -184,9 +185,9 @@ CREATE TABLE `product_colors` (
 --
 
 CREATE TABLE `product_images` (
-  `image_id` int NOT NULL,
-  `product_id` int NOT NULL,
-  `image_url` varchar(255) COLLATE utf8mb4_general_ci NOT NULL
+  `image_id` int(11) NOT NULL,
+  `product_id` int(11) NOT NULL,
+  `image_url` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -196,12 +197,12 @@ CREATE TABLE `product_images` (
 --
 
 CREATE TABLE `users` (
-  `user_id` int NOT NULL,
-  `name` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
-  `username` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
-  `email` varchar(150) COLLATE utf8mb4_general_ci NOT NULL,
-  `password` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
-  `role` varchar(20) COLLATE utf8mb4_general_ci NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `name` varchar(100) NOT NULL,
+  `username` varchar(100) NOT NULL,
+  `email` varchar(150) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `role` varchar(20) NOT NULL,
   `created_at` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -303,19 +304,19 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `contact_messages`
 --
 ALTER TABLE `contact_messages`
-  MODIFY `message_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `message_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `product_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `product_images`
 --
 ALTER TABLE `product_images`
-  MODIFY `image_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `image_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- Constraints for dumped tables
