@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 09, 2025 at 08:16 PM
+-- Generation Time: Dec 10, 2025 at 12:00 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -213,7 +213,8 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`user_id`, `name`, `username`, `email`, `password`, `role`, `created_at`) VALUES
 (1, 'ibrahim', 'mo7sen', 'ibrahim@78gmial.com', 'tffjkkll', 'nmb', '2025-12-23 17:58:35'),
 (2, 'ibrahim', 'H_mo7sen', 'ibrahim@7899gmial.com', 'tffjkkll', 'nmb', '2025-12-23 17:58:35'),
-(3, 'Ali', '3li', 'ali@gmail.com ', 'uhjk', 'nmb', '2025-12-08 16:46:37');
+(3, 'Admin', 'admin', 'admin@admin.com', '$2y$10$wS0SfAmZTeVOcpxfolpPH.AJpL.q3j44nyCggJsC7Xmx7Ij9n7kPW', 'admin', '2025-12-10 00:27:15'),
+(4, 'ahmed', 'shaker', 'ahmed@gmail.com', '$2y$10$hv42UIavA2pW7XK4PLpYaOq4UMnnYsn/R.JjvDvbYGB8xQgwikB4W', 'user', '2025-12-10 00:30:42');
 
 --
 -- Indexes for dumped tables
@@ -317,6 +318,12 @@ ALTER TABLE `products`
 --
 ALTER TABLE `product_images`
   MODIFY `image_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `users`
+--
+ALTER TABLE `users`
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Constraints for dumped tables
