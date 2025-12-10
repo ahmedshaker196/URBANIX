@@ -140,7 +140,7 @@ $result = $conn->query("
 .data-info .box .data p { 
     margin: 0; 
     font-weight: bold; 
-    color: #333; 
+    /* color: #333;  */
 }
 .data-info .box .data span { 
     font-size: 18px; 
@@ -159,8 +159,12 @@ table th, table td {
     border: 1px solid #ccc; 
 }
 table th { 
-    background: #f5f5f5; 
+    background: #555; 
     font-weight: bold; 
+}
+
+.data p{
+    color: #555;
 }
 
 /* Navbar */

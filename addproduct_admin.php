@@ -13,7 +13,7 @@ $categories = $conn->query("SELECT category_id, category_name FROM categories");
 <link rel="stylesheet" href="css/admin.css">
 <link rel="stylesheet" href="css/all.min.css">
 <style>
-.content-box { background: white; padding: 25px; border-radius: 10px; box-shadow: 0 0 10px #00000020; margin-top: 40px; max-width: 600px; }
+.content-box { background: white; padding: 25px; border-radius: 10px; box-shadow: 0 0 10px #00000020; margin-top: 40px;  }
 .form-group { margin-bottom: 15px; }
 .form-group label { display: block; margin-bottom: 5px; font-weight: bold; }
 .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 10px; border-radius: 5px; border: 1px solid #ccc; }
@@ -22,9 +22,9 @@ $categories = $conn->query("SELECT category_id, category_name FROM categories");
 </style>
 </head>
 <body>
-<div class="content" style="margin-left:260px; padding:20px;">
-    <div class="title-info">
-        <p>Add Product</p>
+<div class="content w-50 mx-auto" >
+    <div class="title-info w-100 mx-auto ">
+        <p >Add Product</p>
         <i class="fa-solid fa-plus"></i>
     </div>
 

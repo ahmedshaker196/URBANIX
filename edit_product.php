@@ -50,8 +50,8 @@ if(isset($_POST['update_product'])){
 <link rel="stylesheet" href="css/admin.css">
 <link rel="stylesheet" href="css/all.min.css">
 <style>
-.content { margin-left:260px; padding:20px; }
-.content-box { background: white; padding: 25px; border-radius: 10px; box-shadow: 0 0 10px #00000020; margin-top: 40px; max-width: 600px; margin-left:auto; margin-right:auto; }
+.content {  padding:20px; }
+.content-box { background: white; padding: 25px; border-radius: 10px; box-shadow: 0 0 10px #00000020; margin-top: 40px;  }
 .title-info { display:flex; align-items:center; gap:10px; margin-bottom:20px; }
 .title-info p { font-size:24px; font-weight:bold; margin:0; }
 .form-group { margin-bottom: 15px; }
@@ -63,8 +63,8 @@ h2 { text-align:center; color:#333; margin-bottom:20px; }
 </style>
 </head>
 <body>
-<div class="content">
-    <div class="title-info">
+<div class="content w-50 mx-auto">
+    <div class="title-info w-100">
         <p>Edit Product</p>
         <i class="fa-solid fa-pen-to-square"></i>
     </div>

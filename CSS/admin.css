@@ -41,7 +41,7 @@ body{
 
 
 p{
-    color: var(--text-dark);
+    /* color: var(--text-dark); */
     line-height: 1.6;
 }
 
@@ -272,4 +272,8 @@ tr{margin-left: 5px;}
     padding: 6px;
     border-radius: 6px;
     
+}
+
+.data p{
+  color: white;
 }

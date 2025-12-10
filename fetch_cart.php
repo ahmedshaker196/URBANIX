@@ -102,10 +102,10 @@ table th { background: #f5f5f5; font-weight: bold; }
     <table>
         <thead>
             <tr>
-                <th>Product</th>
-                <th>Price</th>
-                <th>Quantity</th>
-                <th>Total</th>
+                <th style="color:#555">Product</th>
+                <th style="color:#555">Price</th>
+                <th style="color:#555">Quantity</th>
+                <th style="color:#555">Total</th>
             </tr>
         </thead>
         <tbody>
