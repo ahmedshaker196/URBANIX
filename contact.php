@@ -61,14 +61,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <li class="nav-item"><a class="nav-link me-2" href="home.html">HOME</a></li>
         <li class="nav-item"><a class="nav-link me-2" href="products.html">PRODUCTS</a></li>
         <li class="nav-item"><a class="nav-link me-2" href="about.php">ABOUT</a></li>
-        <li class="nav-item"><a class="nav-link me-2" href="cart.html">CART</a></li>
         <li class="nav-item"><a class="nav-link" href="contact.php">CONTACT US</a></li>
       </ul>
-      <form class="d-flex me-2" action="index.php">
-        <a class="mt-1" href="admin.php"><i class="fa-regular fa-user nav-icon me-4"></i></a>
-        <i class="fa-solid fa-cart-shopping nav-icon me-3"></i>
-        <button class="btn nav-btn fw-bold px-3" type="submit">Logout</button>
-      </form>
+      <div class="d-flex me-2 align-items-center">
+        <a href="cart.html">
+            <i class="fa-solid fa-cart-shopping nav-icon me-3" style="cursor:pointer;"></i>
+        </a>
+        <form action="index.php">
+             <button class="btn nav-btn fw-bold px-3" type="submit">logout</button>
+        </form>
+      </div>
+
     </div>
   </div>
 </nav>
