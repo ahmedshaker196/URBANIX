@@ -50,17 +50,17 @@ $result = $conn->query("SELECT * FROM contact_messages ORDER BY message_id DESC"
             vertical-align: middle;
         }
 
-        .btn-del {
-            background:#d9534f;
-            color:#fff;
+      .btn-del i {
+            
+            color:#ff8c33;
             padding:3px 8px;
             border-radius:4px;
             text-decoration:none;
         }
 
-        .btn-del:hover {
-            background:#c9302c;
-            color:#fff;
+        .btn-del i:hover {
+            
+            color:white;
         }
 
         
@@ -120,7 +120,7 @@ $result = $conn->query("SELECT * FROM contact_messages ORDER BY message_id DESC"
                 <td><?= $row['message'] ?></td>
                 <td><?= $row['agree_marketing'] ? 'Yes' : 'No' ?></td>
                 <td>
-                    <a href="delete_post.php?id=<?= $row['message_id'] ?>" class="btn-del" onclick="return confirm('Are you sure you want to delete this message?');">Delete</a>
+                    <a href="delete_post.php?id=<?= $row['message_id'] ?>" class="btn-del" onclick="return confirm('Are you sure you want to delete this message?');"><i class="fa-solid fa-delete-left" ></i></a>
                 </td>
             </tr>
             <?php endwhile; ?>

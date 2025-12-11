@@ -35,8 +35,10 @@ $result = $conn->query("
        <link rel="stylesheet" href="css/admin.css">
     <link rel="stylesheet" href="css/bootstrap.css">
     <style>
-        .btn-edit { background:#ff9800; color:#fff; padding:2px 6px; border-radius:3px; text-decoration:none; margin-right:5px; }
-        .btn-del { background:#d9534f; color:#fff; padding:2px 6px; border-radius:3px; text-decoration:none; }
+        .btn-edit i {color:#ff8c33; padding:2px 6px; border-radius:3px; text-decoration:none; margin-right:20px; }
+        .btn-del i { color:#ff8c33; padding:2px 6px; border-radius:3px; text-decoration:none; }
+        .btn-del i:hover{color:white;}
+        .btn-edit i:hover{color:white;}
     </style>
 </head>
 <body style="padding-top: 50px; ;">
@@ -109,7 +111,7 @@ $result = $conn->query("
               <li>
                 <a href="fetch_cart.php">
                  <i class="fa-jelly fa-regular fa-chart-bar"></i>
-                    <p>charts</p>
+                    <p>carts</p>
                 </a>
             </li>
 
@@ -119,18 +121,7 @@ $result = $conn->query("
                     <p>posts</p>
                 </a>
             </li>
-              <li>
-                <a href="#">
-                 <i class="fa-regular fa-star"></i>
-                    <p>favorite</p>
-                </a>
-            </li>
-              <li>
-                <a href="#">
-                 <i class="fa-solid fa-gear"></i>
-                    <p>setting</p>
-                </a>
-            </li>
+         
               <li class="log-out">
                 <a href="logout.php">
                  <i class="fa-solid fa-arrow-right-from-bracket"></i>
@@ -196,8 +187,8 @@ $result = $conn->query("
                      <td><span class="price">$<?= number_format($row['price'], 2) ?></span></td>
                        <td><span class="count"><?= $row['stock'] ?></span></td>
                        <td>
-                           <a href="edit_product.php?id=<?= $row['product_id'] ?>" class="btn-edit">Edit</a>
-                           <a href="delete_product.php?id=<?= $row['product_id'] ?>" class="btn-del">Delete</a>
+                           <a href="edit_product.php?id=<?= $row['product_id'] ?>" class="btn-edit"><i class="fa-regular fa-pen-to-square"></i></a>
+                           <a href="delete_product.php?id=<?= $row['product_id'] ?>" class="btn-del"><i class="fa-solid fa-delete-left"></i></a>
                        </td>
                 </tr>
                 <?php endwhile; ?>

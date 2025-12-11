@@ -51,14 +51,14 @@ if(isset($_POST['update_product'])){
 <link rel="stylesheet" href="css/all.min.css">
 <style>
 .content {  padding:20px; }
-.content-box { background: white; padding: 25px; border-radius: 10px; box-shadow: 0 0 10px #00000020; margin-top: 40px;  }
+.content-box { background:white; padding: 25px; border-radius: 10px; box-shadow: 0 0 10px #00000020; margin-top: 40px;  }
 .title-info { display:flex; align-items:center; gap:10px; margin-bottom:20px; }
 .title-info p { font-size:24px; font-weight:bold; margin:0; }
 .form-group { margin-bottom: 15px; }
 .form-group label { display: block; margin-bottom: 5px; font-weight: bold; }
 .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 10px; border-radius: 5px; border: 1px solid #ccc; }
-.btn-save { background: #2e7d32; color: white; padding: 10px 20px; border-radius: 6px; border: none; cursor: pointer; margin-top: 10px; width: 100%; font-size:16px; }
-.btn-save:hover { background: #27632a; }
+.btn-save { background: #ff8c33;; color: white; padding: 10px 20px; border-radius: 10px; border: none; cursor: pointer; margin-top: 10px; width: 100%; font-size:16px; }
+.btn-save:hover { background: #cac9c9; }
 h2 { text-align:center; color:#333; margin-bottom:20px; }
 </style>
 </head>
