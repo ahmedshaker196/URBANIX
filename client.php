@@ -46,8 +46,8 @@ $result = $conn->query("
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item"><a class="nav-link me-2" aria-current="page" href="home.html">HOME</a></li>
-        <li class="nav-item"><a class="nav-link me-2" href="products.html">PRODUCTS</a></li>
-        <li class="nav-item"><a class="nav-link me-2" href="about.html">ABOUT</a></li>
+        <li class="nav-item"><a class="nav-link me-2" href="products.php">PRODUCTS</a></li>
+        <li class="nav-item"><a class="nav-link me-2" href="about.php">ABOUT</a></li>
         <li class="nav-item"><a class="nav-link" href="contact.php">CONTACT US</a></li>
       </ul>
      <div class="d-flex me-2 align-items-center">

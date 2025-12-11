@@ -28,7 +28,7 @@
           <a class="nav-link me-2" aria-current="page" href="home.html">HOME</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link me-2" href="products.html">PRODUCTS</a>
+          <a class="nav-link me-2" href="products.php">PRODUCTS</a>
         </li>
          <li class="nav-item">
           <a class="nav-link me-2" href="about.php">ABOUT</a>

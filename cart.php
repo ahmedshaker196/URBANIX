@@ -7,7 +7,7 @@ session_start();
 $DB_HOST = 'localhost';
 $DB_USER = 'root';      
 $DB_PASS = '';          
-$DB_NAME = 'URBANIX2';
+$DB_NAME = 'URBANIX';
 
 $mysqli = mysqli_connect($DB_HOST, $DB_USER, $DB_PASS, $DB_NAME);
 if (!$mysqli) {
