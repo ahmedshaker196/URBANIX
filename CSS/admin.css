@@ -110,9 +110,6 @@ h1,h2,h3{
 @keyframes shine {
     to { left: 120%; }
 }
-
-
-
 .img-box{
   width:50px;
   height: 50px;
@@ -137,7 +134,7 @@ h1,h2,h3{
 }
 .menu{
   background-color:var(--black-bg);
-  width:90px;
+  width:130px;
   height: 100vh;
   padding:20px;
   overflow: hidden;
@@ -145,7 +142,7 @@ h1,h2,h3{
 
 }
 .menu:hover{
-  width: 260px;
+  width: 270px;
 }
 
 .menu ul {
@@ -157,7 +154,7 @@ h1,h2,h3{
   display:block ;
   text-decoration: none;
   padding: 10px;
-  margin: 10px 0;
+  margin: 20px 0;
   border-radius: 8px;
   display: flex;
   align-items: center;
@@ -173,7 +170,7 @@ h1,h2,h3{
 .menu .log-out{
   position: absolute;
   bottom: 0;
-  width: 100%;
+  width: 80%;
   
 }
 
@@ -272,8 +269,4 @@ tr{margin-left: 5px;}
     padding: 6px;
     border-radius: 6px;
     
-}
-
-.data p{
-  color: white;
 }

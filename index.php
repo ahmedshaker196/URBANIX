@@ -41,7 +41,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 header("Location: admin.php");
                 exit;
             } else {
-                header("Location: home.php");
+                header("Location: home.html");
                 exit;
             }
 

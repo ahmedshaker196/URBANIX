@@ -39,7 +39,7 @@
 
       </ul>
       <div class="d-flex me-2 align-items-center">
-    <a href="cart.html">
+    <a href="cart.php">
         <i class="fa-solid fa-cart-shopping nav-icon me-3" style="cursor:pointer;"></i>
     </a>
 

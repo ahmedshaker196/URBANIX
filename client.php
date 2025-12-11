@@ -32,158 +32,7 @@ $result = $conn->query("
 <link rel="stylesheet" href="css/admin.css">
 <link rel="stylesheet" href="css/bootstrap.css">
 <style>
-/* Buttons */
-.btn-edit { 
-    background: #ff9800; 
-    color: #fff; 
-    padding: 2px 6px; 
-    border-radius: 3px; 
-    text-decoration: none; 
-    margin-right: 5px; 
-}
-.btn-del { 
-    background: #d9534f; 
-    color: #fff; 
-    padding: 2px 6px; 
-    border-radius: 3px; 
-    text-decoration: none; 
-}
 
-/* Sidebar menu */
-.menu { 
-    width: 260px; 
-    position: fixed; 
-    top: 0; 
-    left: 0; 
-    height: 100%; 
-    background: #1e1e2f; 
-    padding-top: 50px; 
-    overflow-y: auto; 
-}
-.menu ul { 
-    list-style: none; 
-    padding: 0; 
-    margin: 0; 
-}
-.menu ul li { 
-    display: block; 
-}
-.menu ul li a { 
-    display: flex; 
-    align-items: center; 
-    color: #fff; 
-    text-decoration: none; 
-    padding: 12px 20px; 
-    transition: 0.3s; 
-}
-.menu ul li a.active, 
-.menu ul li a:hover { 
-    background: #2e2e4d; 
-}
-.menu ul li a i { 
-    margin-right: 10px; 
-    font-size: 18px; 
-}
-
-/* Profile in sidebar */
-.menu .profile { 
-    text-align: center; 
-    margin-bottom: 20px; 
-}
-.menu .profile .img-box img { 
-    width: 80px; 
-    border-radius: 50%; 
-    margin-bottom: 10px; 
-}
-
-/* Content area */
-.content { 
-    margin-left: 260px; 
-    padding: 20px; 
-}
-.title-info { 
-    display: flex; 
-    align-items: center; 
-    margin-bottom: 20px; 
-}
-.title-info p { 
-    font-size: 22px; 
-    font-weight: bold; 
-    margin-right: 10px; 
-}
-.title-info i { 
-    font-size: 22px; 
-    color: #555; 
-}
-
-/* Dashboard boxes */
-.data-info { 
-    display: flex; 
-    gap: 15px; 
-    flex-wrap: wrap; 
-    margin-bottom: 30px;
-}
-.data-info .box { 
-    background: #fff; 
-    padding: 15px; 
-    flex: 1 1 200px; 
-    border-radius: 10px; 
-    display: flex; 
-    align-items: center; 
-    box-shadow: 0 0 10px #00000020; 
-}
-.data-info .box i { 
-    font-size: 28px; 
-    margin-right: 10px; 
-    color: #555; 
-}
-.data-info .box .data p { 
-    margin: 0; 
-    font-weight: bold; 
-    /* color: #333;  */
-}
-.data-info .box .data span { 
-    font-size: 18px; 
-    color: #555; 
-}
-
-/* Table */
-table { 
-    width: 100%; 
-    border-collapse: collapse; 
-    margin-top: 20px; 
-}
-table th, table td { 
-    padding: 12px 15px; 
-    text-align: left; 
-    border: 1px solid #ccc; 
-}
-table th { 
-    background: #555; 
-    font-weight: bold; 
-}
-
-.data p{
-    color: #555;
-}
-
-/* Navbar */
-.navbar { 
-    background: #fff !important; 
-    box-shadow: 0 2px 5px #00000010; 
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-    .menu { 
-        width: 100%; 
-        height: auto; 
-        position: relative; 
-    }
-    .content { 
-        margin-left: 0; 
-    }
-}
 </style>
 </head>
 <body style="padding-top: 50px;">
@@ -199,16 +48,17 @@ table th {
         <li class="nav-item"><a class="nav-link me-2" aria-current="page" href="home.html">HOME</a></li>
         <li class="nav-item"><a class="nav-link me-2" href="products.html">PRODUCTS</a></li>
         <li class="nav-item"><a class="nav-link me-2" href="about.html">ABOUT</a></li>
-        <li class="nav-item"><a class="nav-link me-2" href="cart.html">CART</a></li>
         <li class="nav-item"><a class="nav-link" href="contact.php">CONTACT US</a></li>
       </ul>
-      <form class="d-flex me-2" action="index.php">
-        <a class="mt-1" href="admin.php">
-            <i class="fa-regular fa-user align-self-center nav-icon me-4"></i>
-        </a>
-        <i class="fa-solid fa-cart-shopping align-self-center nav-icon me-3"></i>
+     <div class="d-flex me-2 align-items-center">
+    <a href="cart.php">
+        <i class="fa-solid fa-cart-shopping nav-icon me-3" style="cursor:pointer;"></i>
+    </a>
+
+    <form action="index.php">
         <button class="btn nav-btn fw-bold px-3" type="submit">logout</button>
-      </form>
+    </form>
+</div>
     </div>
   </div>
 </nav>
@@ -222,13 +72,13 @@ table th {
             <h2>Jorg </h2>
         </li>
         <li>
-            <a  class="active" href="admin.php">
-               <i class="fa-solid fa-house"></i>
+            <a   href="admin.php">
+                <i class="fa-solid fa-house"></i>
                 <p>dashboard</p>
             </a>
         </li>
         <li>
-            <a href="client.php">
+            <a class="active" href="client.php">
                 <i class="fa-solid fa-users"></i>
                 <p>clients</p>
             </a>
@@ -242,27 +92,16 @@ table th {
         <li>
             <a href="fetch_cart.php">
                 <i class="fa-jelly fa-regular fa-chart-bar"></i>
-                <p>charts</p>
+                <p>carts</p>
             </a>
         </li>
         <li>
-            <a href="#">
+            <a href="posts.php">
                 <i class="fa-solid fa-pen"></i>
                 <p>posts</p>
             </a>
         </li>
-        <li>
-            <a href="#">
-                <i class="fa-regular fa-star"></i>
-                <p>favorite</p>
-            </a>
-        </li>
-        <li>
-            <a href="#">
-                <i class="fa-solid fa-gear"></i>
-                <p>setting</p>
-            </a>
-        </li>
+     
         <li class="log-out">
             <a href="logout.php">
                 <i class="fa-solid fa-arrow-right-from-bracket"></i>
@@ -274,8 +113,8 @@ table th {
 
 <div class="content">
     <div class="title-info">
-        <p>dashboard</p>
-        <i class="fa-solid fa-house"></i>
+        <p>clients</p>
+       <i class="fa-solid fa-users"></i>
     </div>
     <div class="data-info">
         <div class="box">

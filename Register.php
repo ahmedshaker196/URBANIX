@@ -11,11 +11,9 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-$message = ""; // مكان لرسائل النجاح / الخطأ
+$message = "";
 
-// ===========================
-// 2) Handle Form Submit
-// ===========================
+
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     $name     = trim($_POST["name"]);
@@ -24,12 +22,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $password = $_POST["password"];
     $cpassword = $_POST["cpassword"];
 
-    // Validate Confirm Password
     if ($password !== $cpassword) {
         $message = "<div class='alert alert-danger'>Passwords do not match!</div>";
     } else {
 
-        // Check Email or Username Exists
         $check_sql = "SELECT * FROM users WHERE email=? OR username=?";
         $stmt = $conn->prepare($check_sql);
         $stmt->bind_param("ss", $email, $username);
@@ -40,10 +36,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $message = "<div class='alert alert-danger'>Email or Username already exists!</div>";
         } else {
 
-            // Hash Password
             $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
-            // Insert User
             $insert_sql = "INSERT INTO users (name, username, email, password, role, created_at)
                            VALUES (?, ?, ?, ?, 'user', NOW())";
 

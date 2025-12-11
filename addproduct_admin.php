@@ -1,7 +1,5 @@
 <?php
 require_once 'config/db.php';
-
-$categories = $conn->query("SELECT category_id, category_name FROM categories");
 ?>
 
 <!DOCTYPE html>
@@ -13,23 +11,26 @@ $categories = $conn->query("SELECT category_id, category_name FROM categories");
 <link rel="stylesheet" href="css/admin.css">
 <link rel="stylesheet" href="css/all.min.css">
 <style>
+.content p:hover{background:#ff8c33}
 .content-box { background: white; padding: 25px; border-radius: 10px; box-shadow: 0 0 10px #00000020; margin-top: 40px;  }
 .form-group { margin-bottom: 15px; }
 .form-group label { display: block; margin-bottom: 5px; font-weight: bold; }
-.form-group input, .form-group select, .form-group textarea { width: 100%; padding: 10px; border-radius: 5px; border: 1px solid #ccc; }
-.btn-save { background: #2e7d32; color: white; padding: 10px 20px; border-radius: 6px; border: none; cursor: pointer; margin-top: 10px; }
-.btn-save:hover { background: #27632a; }
+.form-group input, .form-group textarea { width: 100%; padding: 10px; border-radius: 5px; border: 1px solid #ccc; }
+.btn-save { background: #ff8c33; color: white; padding: 10px 20px; border-radius: 6px; border: none; cursor: pointer; margin-top: 10px; }
+.btn-save:hover { background:#cac9c9; }
 </style>
 </head>
 <body>
-<div class="content w-50 mx-auto" >
-    <div class="title-info w-100 mx-auto ">
-        <p >Add Product</p>
+
+<div class="content w-50 mx-auto">
+    <div class="title-info w-100 mx-auto">
+        <p>Add Product</p>
         <i class="fa-solid fa-plus"></i>
     </div>
 
     <div class="content-box">
         <form action="" method="post" enctype="multipart/form-data">
+
             <div class="form-group">
                 <label for="name">Product Name</label>
                 <input type="text" id="name" name="name" required>
@@ -51,15 +52,6 @@ $categories = $conn->query("SELECT category_id, category_name FROM categories");
             </div>
 
             <div class="form-group">
-                <label for="category_id">Category</label>
-                <select id="category_id" name="category_id" required>
-                    <?php while($cat = $categories->fetch_assoc()): ?>
-                        <option value="<?= $cat['category_id'] ?>"><?= $cat['category_name'] ?></option>
-                    <?php endwhile; ?>
-                </select>
-            </div>
-
-            <div class="form-group">
                 <label for="is_new">New Product?</label>
                 <input type="checkbox" id="is_new" name="is_new" value="1">
             </div>
@@ -76,34 +68,40 @@ $categories = $conn->query("SELECT category_id, category_name FROM categories");
 
 <?php
 if(isset($_POST['save_product'])){
-    $name = $_POST['name'];
+    
+    $name        = $_POST['name'];
     $description = $_POST['description'];
-    $price = $_POST['price'];
-    $stock = $_POST['stock'];
-    $category_id = $_POST['category_id'];
-    $is_new = isset($_POST['is_new']) ? 1 : 0;
-    $created_at = date('Y-m-d H:i:s');
+    $price       = $_POST['price'];
+    $stock       = $_POST['stock'];
+    $is_new      = isset($_POST['is_new']) ? 1 : 0;
 
- // Upload image
+    // Upload image
     $targetDir = "uploads/";
     if(!is_dir($targetDir)) mkdir($targetDir, 0777, true);
-    $targetFile = $targetDir . basename($_FILES["image"]["name"]);
+
+    $fileName = time() . "_" . basename($_FILES["image"]["name"]);
+    $targetFile = $targetDir . $fileName;
 
     if(move_uploaded_file($_FILES["image"]["tmp_name"], $targetFile)){
-        $sql = "INSERT INTO products (name, description, price, stock, category_id, is_new, created_at)
-                VALUES ('$name', '$description', '$price', '$stock', '$category_id', '$is_new', '$created_at')";
+
+        // Insert into products table
+        $sql = "
+            INSERT INTO products (name, description, price, stock, is_new, image)
+            VALUES ('$name', '$description', '$price', '$stock', '$is_new', '$targetFile')
+        ";
+
         if($conn->query($sql)){
-            $product_id = $conn->insert_id;
-            $conn->query("INSERT INTO product_images (product_id, image_url) VALUES ('$product_id', '$targetFile')");
-            echo "<p style='color:green;'>Product added successfully!</p>";
+            echo "<p style='color:green; text-align:center;'>Product added successfully!</p>";
         } else {
-            echo "Error: " . $conn->error;
+            echo "<p style='color:red;'>Database Error: " . $conn->error . "</p>";
         }
+
     } else {
-        echo "Error uploading image.";
+        echo "<p style='color:red;'>Error uploading image.</p>";
     }
 }
 $conn->close();
 ?>
+
 </body>
 </html>
