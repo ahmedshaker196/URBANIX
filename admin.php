@@ -54,6 +54,10 @@ $result = $conn->query("
         .btn-del i { color:#ff8c33; padding:2px 6px; border-radius:3px; text-decoration:none; }
         .btn-del i:hover{color:white;}
         .btn-edit i:hover{color:white;}
+        .btn-edit i {color:#ff8c33; padding:2px 6px; border-radius:3px; text-decoration:none; margin-right:20px; }
+        .btn-del i { color:#ff8c33; padding:2px 6px; border-radius:3px; text-decoration:none; }
+        .btn-del i:hover{color:white;}
+        .btn-edit i:hover{color:white;}
     </style>
 </head>
 <body style="padding-top: 50px;">

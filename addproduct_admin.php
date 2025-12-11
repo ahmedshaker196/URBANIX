@@ -12,6 +12,7 @@ require_once 'config/db.php';
 <link rel="stylesheet" href="css/all.min.css">
 <style>
 .content p:hover{background:#ff8c33}
+.content p:hover{background:#ff8c33}
 .content-box { background: white; padding: 25px; border-radius: 10px; box-shadow: 0 0 10px #00000020; margin-top: 40px;  }
 .form-group { margin-bottom: 15px; }
 .form-group label { display: block; margin-bottom: 5px; font-weight: bold; }

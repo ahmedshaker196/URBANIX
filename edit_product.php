@@ -80,6 +80,7 @@ if(isset($_POST['update_product'])){
 <style>
 .content {  padding:20px; }
 .content-box { background:white; padding: 25px; border-radius: 10px; box-shadow: 0 0 10px #00000020; margin-top: 40px;  }
+.content-box { background:white; padding: 25px; border-radius: 10px; box-shadow: 0 0 10px #00000020; margin-top: 40px;  }
 .title-info { display:flex; align-items:center; gap:10px; margin-bottom:20px; }
 .title-info p { font-size:24px; font-weight:bold; margin:0; }
 .form-group { margin-bottom: 15px; }
