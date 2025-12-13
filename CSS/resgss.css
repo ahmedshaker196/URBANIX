@@ -1,0 +1,51 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --accent-orange: #ff9f00;
+    --whiteColor: #ffffff;
+    --black-bg: #1a1a1a;
+}
+
+body { 
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background:
+        radial-gradient(circle at 20% 20%, rgba(255, 140, 51, 0.35), transparent 40%),
+        radial-gradient(circle at 80% 80%, rgba(255, 179, 71, 0.25), transparent 45%),
+        linear-gradient(135deg, #0b0e13 0%, #141824 60%, #1a1f2b 100%);
+
+}
+
+.register-box {
+    background-color: var(--black-bg);
+    border: 1px solid var(--whiteColor);
+    border-radius: 40px;
+}
+
+.register-box h3 {
+    color: var(--accent-orange);
+}
+
+
+.btn-custom {
+    
+    background-color: var(--accent-orange);
+    font-weight: bold;
+    color: black;
+}
+
+.btn-custom:hover {
+    border: 2px solid var(--accent-orange);
+    background:none;
+    color: var(--accent-orange);
+}
+
+.link-orange {
+    color: var(--accent-orange);
+}

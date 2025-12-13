@@ -62,55 +62,14 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     <title>URBANIX</title>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css">
-
-    <style>
-        :root {
-            --accent-orange: #ff9f00;
-            --whiteColor: #ffffff;
-            --black-bg: #1a1a1a;
-        }
-     body {
-    min-height: 100vh;
-    margin: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    background:
-        radial-gradient(circle at 20% 20%, rgba(255, 140, 51, 0.35), transparent 40%),
-        radial-gradient(circle at 80% 80%, rgba(255, 179, 71, 0.25), transparent 45%),
-        linear-gradient(135deg, #0b0e13 0%, #141824 60%, #1a1f2b 100%);
-
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-
-        .register-box {
-            background-color: var(--black-bg);
-            border: 1px solid var(--whiteColor);
-            border-radius: 40px;
-        }
-        .register-box h3 { color: var(--accent-orange); }
-        .form-label { color: white; }
-        .form-control {
-            border-radius: 40px;
-            height: 45px;
-        }
-        .btn-custom {
-            background-color: var(--accent-orange);
-            border-radius: 40px;
-            height: 45px;
-            font-weight: bold;
-            color: black;
-        }
-        .btn-custom:hover { opacity: 0.9; }
-        .link-orange { color: var(--accent-orange); }
-    </style>
+    <link rel="stylesheet" href="CSS/regss.css">
+  
 </head>
 
 <body>
 
-<div class="container d-flex justify-content-center align-items-center min-vh-100">
-    <div class="register-box col-md-5 col-11 p-4 shadow">
+<div class="container d-flex justify-content-center align-items-center py-5">
+    <div class="register-box col-lg-5 col-md-12 col-sm-12 p-4 shadow">
 
         <h3 class="text-center mb-4">Register Your Account</h3>
 
@@ -120,31 +79,31 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         <form method="POST" action="">
 
             <div class="mb-3">
-                <label class="form-label">Name</label>
-                <input type="text" name="name" class="form-control" required placeholder="Enter your full name...">
+                <label class="form-label text-white">Name</label>
+                <input type="text" name="name" class="form-control py-2 rounded-5" required placeholder="Enter your full name...">
             </div>
 
             <div class="mb-3">
-                <label class="form-label">Username</label>
-                <input type="text" name="username" class="form-control" required placeholder="Enter a username...">
+                <label class="form-label text-white">Username</label>
+                <input type="text" name="username" class="form-control py-2 rounded-5" required placeholder="Enter a username...">
             </div>
 
             <div class="mb-3">
-                <label class="form-label">Email Address</label>
-                <input type="email" name="email" class="form-control" required placeholder="Enter your email address...">
+                <label class="form-label text-white">Email Address</label>
+                <input type="email" name="email" class="form-control py-2 rounded-5" required placeholder="Enter your email address...">
             </div>
 
             <div class="mb-3">
-                <label class="form-label">Password</label>
-                <input type="password" name="password" class="form-control" required placeholder="Enter your password...">
+                <label class="form-label text-white">Password</label>
+                <input type="password" name="password" class="form-control py-2 rounded-5" required placeholder="Enter your password...">
             </div>
 
             <div class="mb-3">
-                <label class="form-label">Confirm Password</label>
-                <input type="password" name="cpassword" class="form-control" required placeholder="Enter your password again...">
+                <label class="form-label text-white">Confirm Password</label>
+                <input type="password" name="cpassword" class="form-control py-2 rounded-5" required placeholder="Enter your password again...">
             </div>
 
-            <button type="submit" class="btn btn-custom w-100 mt-3">
+            <button type="submit" class="btn btn-custom w-100 mt-3  py-2 rounded-5">
                 Sign Up
             </button>
 
