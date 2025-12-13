@@ -116,7 +116,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 radial-gradient(circle at 80% 80%, rgba(255, 179, 71, 0.25), transparent 45%),
                 linear-gradient(135deg, #0b0e13 0%, #141824 60%, #1a1f2b 100%);
 
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            /* font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; */
         }
 
         .login-box {
@@ -147,7 +147,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         }
 
         .btn-custom:hover {
-            opacity: 0.9;
+             border: 2px solid var(--accent-orange);
+    background:none;
+    color: var(--accent-orange);
         }
 
         .link-orange {
