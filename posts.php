@@ -52,7 +52,7 @@ $result = $conn->query("SELECT * FROM contact_messages ORDER BY message_id DESC"
 
       .btn-del i {
             
-            color:#ff8c33;
+            color:black;
             padding:3px 8px;
             border-radius:4px;
             text-decoration:none;
@@ -88,8 +88,9 @@ $result = $conn->query("SELECT * FROM contact_messages ORDER BY message_id DESC"
 
 <div class="content">
     <div class="title-info">
-        <i class="fa-solid fa-pen"></i>
         <p>Contact Messages</p>
+        <i class="fa-solid fa-pen"></i>
+        
     </div>
 
     <table class="table table-bordered table-striped custom-table">

@@ -50,14 +50,6 @@ while ($row = mysqli_fetch_assoc($result)) {
     .add-to-cart-btn { cursor:pointer; border:none; background:#111; color:#fff; }
     .pro-img { min-height:160px; display:flex; align-items:center; justify-content:center; }
     
-    /* Header Styles */
-    .navbar { background:#fff; box-shadow:0 2px 10px rgba(0,0,0,0.1); }
-    .nav-link { color:#333 !important; font-weight:500; }
-    .nav-link:hover { color:#000 !important; }
-    .logo { font-weight:bold; font-size:24px; color:#000; }
-    .nav-btn { background:#000; color:#fff; border-radius:20px; }
-    .nav-btn:hover { background:#333; color:#fff; }
-    .nav-icon { font-size:20px; color:#333; }
   </style>
 </head>
 <body>

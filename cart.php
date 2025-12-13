@@ -1,13 +1,21 @@
 <?php
-
 session_start();
-//require 'db.php';
 
+/* =========================
+   AUTH CHECK
+========================= */
+if (!isset($_SESSION['user_id'], $_SESSION['cart_id'])) {
+    header("Location: index.php");
+    exit;
+}
 
+/* =========================
+   Database Connection
+========================= */
 $DB_HOST = 'localhost';
-$DB_USER = 'root';      
-$DB_PASS = '';          
-$DB_NAME = 'URBANIX';
+$DB_USER = 'root';
+$DB_PASS = '';
+$DB_NAME = 'urbanix';
 
 $mysqli = mysqli_connect($DB_HOST, $DB_USER, $DB_PASS, $DB_NAME);
 if (!$mysqli) {
@@ -15,159 +23,164 @@ if (!$mysqli) {
 }
 mysqli_set_charset($mysqli, "utf8mb4");
 
+$cart_id = $_SESSION['cart_id'];
 
-
-
-
-
-
-$session_id = session_id();
-
-
+/* =========================
+   HANDLE POST ACTIONS
+========================= */
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-    
+    /* ---- ADD TO CART ---- */
     if (isset($_POST['product_id'])) {
-        $product_id = (int) $_POST['product_id'];
-        $qty = isset($_POST['qty']) ? (int) $_POST['qty'] : 1;
+
+        $product_id = (int)$_POST['product_id'];
+        $qty = isset($_POST['qty']) ? (int)$_POST['qty'] : 1;
         if ($qty < 1) $qty = 1;
 
-        
-        $sql = "SELECT id, price FROM products WHERE id = ?";
-        $stmt = mysqli_prepare($mysqli, $sql);
+        // Get product price
+        $stmt = mysqli_prepare(
+            $mysqli,
+            "SELECT price FROM products WHERE id = ? LIMIT 1"
+        );
         mysqli_stmt_bind_param($stmt, 'i', $product_id);
         mysqli_stmt_execute($stmt);
-        mysqli_stmt_bind_result($stmt, $found_id, $price);
-        $exists = mysqli_stmt_fetch($stmt);
+        mysqli_stmt_bind_result($stmt, $price);
+        $found = mysqli_stmt_fetch($stmt);
         mysqli_stmt_close($stmt);
 
-        if ($exists) {
-            
-            $sql = "SELECT id FROM carts WHERE session_id = ? LIMIT 1";
-            $stmt = mysqli_prepare($mysqli, $sql);
-            mysqli_stmt_bind_param($stmt, 's', $session_id);
-            mysqli_stmt_execute($stmt);
-            mysqli_stmt_bind_result($stmt, $cart_id);
-            $found_cart = mysqli_stmt_fetch($stmt);
-            mysqli_stmt_close($stmt);
+        if ($found) {
 
-            if (!$found_cart) {
-                $sql = "INSERT INTO carts (session_id) VALUES (?)";
-                $stmt = mysqli_prepare($mysqli, $sql);
-                mysqli_stmt_bind_param($stmt, 's', $session_id);
-                mysqli_stmt_execute($stmt);
-                $cart_id = mysqli_insert_id($mysqli);
-                mysqli_stmt_close($stmt);
-            }
-
-            
-            $sql = "SELECT id, qty FROM cart_items WHERE cart_id = ? AND product_id = ? LIMIT 1";
-            $stmt = mysqli_prepare($mysqli, $sql);
+            // Check if item already in cart
+            $stmt = mysqli_prepare(
+                $mysqli,
+                "SELECT id, qty FROM cart_items 
+                 WHERE cart_id = ? AND product_id = ? LIMIT 1"
+            );
             mysqli_stmt_bind_param($stmt, 'ii', $cart_id, $product_id);
             mysqli_stmt_execute($stmt);
             mysqli_stmt_bind_result($stmt, $item_id, $existing_qty);
-            $found_item = mysqli_stmt_fetch($stmt);
+            $exists = mysqli_stmt_fetch($stmt);
             mysqli_stmt_close($stmt);
 
-            if ($found_item) {
+            if ($exists) {
                 $new_qty = $existing_qty + $qty;
-                $sql = "UPDATE cart_items SET qty = ? WHERE id = ?";
-                $stmt = mysqli_prepare($mysqli, $sql);
+                $stmt = mysqli_prepare(
+                    $mysqli,
+                    "UPDATE cart_items SET qty = ? WHERE id = ?"
+                );
                 mysqli_stmt_bind_param($stmt, 'ii', $new_qty, $item_id);
                 mysqli_stmt_execute($stmt);
                 mysqli_stmt_close($stmt);
             } else {
-                $price_at_added = (float) $price;
-                $sql = "INSERT INTO cart_items (cart_id, product_id, qty, price_at_added) VALUES (?, ?, ?, ?)";
-                $stmt = mysqli_prepare($mysqli, $sql);
-                mysqli_stmt_bind_param($stmt, 'iiid', $cart_id, $product_id, $qty, $price_at_added);
+                $stmt = mysqli_prepare(
+                    $mysqli,
+                    "INSERT INTO cart_items (cart_id, product_id, qty, price_at_added)
+                     VALUES (?, ?, ?, ?)"
+                );
+                mysqli_stmt_bind_param(
+                    $stmt,
+                    'iiid',
+                    $cart_id,
+                    $product_id,
+                    $qty,
+                    $price
+                );
                 mysqli_stmt_execute($stmt);
                 mysqli_stmt_close($stmt);
             }
         }
     }
 
-    
-    if (isset($_POST['action'])) {
-        $action = $_POST['action'];
+    /* ---- UPDATE QTY ---- */
+    if (isset($_POST['action']) && $_POST['action'] === 'update_qty') {
 
-        if ($action === 'update_qty' && isset($_POST['item_id'], $_POST['qty'])) {
-            $item_id = (int) $_POST['item_id'];
-            $qty = (int) $_POST['qty'];
-            if ($qty < 1) $qty = 1;
+        $item_id = (int)$_POST['item_id'];
+        $qty = (int)$_POST['qty'];
+        if ($qty < 1) $qty = 1;
 
-            $sql = "UPDATE cart_items ci
-                    JOIN carts c ON ci.cart_id = c.id
-                    SET ci.qty = ?
-                    WHERE ci.id = ? AND c.session_id = ?
-                    LIMIT 1";
-            $stmt = mysqli_prepare($mysqli, $sql);
-            mysqli_stmt_bind_param($stmt, 'iis', $qty, $item_id, $session_id);
-            mysqli_stmt_execute($stmt);
-            mysqli_stmt_close($stmt);
-        }
-
-        if ($action === 'remove_item' && isset($_POST['item_id'])) {
-            $item_id = (int) $_POST['item_id'];
-            
-            
-            $sql = "DELETE FROM cart_items 
-                    WHERE id = ? 
-                    AND cart_id = (SELECT id FROM carts WHERE session_id = ? LIMIT 1)";
-            
-            $stmt = mysqli_prepare($mysqli, $sql);
-            mysqli_stmt_bind_param($stmt, 'is', $item_id, $session_id);
-            mysqli_stmt_execute($stmt);
-            mysqli_stmt_close($stmt);
-        }
+        $stmt = mysqli_prepare(
+            $mysqli,
+            "UPDATE cart_items
+             SET qty = ?
+             WHERE id = ? AND cart_id = ?"
+        );
+        mysqli_stmt_bind_param($stmt, 'iii', $qty, $item_id, $cart_id);
+        mysqli_stmt_execute($stmt);
+        mysqli_stmt_close($stmt);
     }
 
-    
-    header('Location: cart.php');
+    /* ---- REMOVE ITEM ---- */
+    if (isset($_POST['action']) && $_POST['action'] === 'remove_item') {
+
+        $item_id = (int)$_POST['item_id'];
+
+        $stmt = mysqli_prepare(
+            $mysqli,
+            "DELETE FROM cart_items
+             WHERE id = ? AND cart_id = ?"
+        );
+        mysqli_stmt_bind_param($stmt, 'ii', $item_id, $cart_id);
+        mysqli_stmt_execute($stmt);
+        mysqli_stmt_close($stmt);
+    }
+
+    header("Location: cart.php");
     exit;
 }
 
-
-$cart_id = null;
-$sql = "SELECT id FROM carts WHERE session_id = ? LIMIT 1";
-$stmt = mysqli_prepare($mysqli, $sql);
-mysqli_stmt_bind_param($stmt, 's', $session_id);
-mysqli_stmt_execute($stmt);
-mysqli_stmt_bind_result($stmt, $cart_id);
-mysqli_stmt_fetch($stmt);
-mysqli_stmt_close($stmt);
-
+/* =========================
+   FETCH CART ITEMS
+========================= */
 $items = [];
 $total_subtotal = 0.0;
 
-if ($cart_id) {
-    $sql = "SELECT ci.id AS ci_id, p.id AS product_id, p.name, ci.qty, ci.price_at_added, (ci.qty * ci.price_at_added) AS subtotal, p.image
-            FROM cart_items ci
-            JOIN products p ON p.id = ci.product_id
-            WHERE ci.cart_id = ?";
-    $stmt = mysqli_prepare($mysqli, $sql);
-    mysqli_stmt_bind_param($stmt, 'i', $cart_id);
-    mysqli_stmt_execute($stmt);
-    mysqli_stmt_bind_result($stmt, $ci_id, $product_id, $pname, $qty, $price_at_added, $subtotal, $pimage);
-    while (mysqli_stmt_fetch($stmt)) {
-        $items[] = [
-            'ci_id' => $ci_id,
-            'product_id' => $product_id,
-            'name' => $pname,
-            'qty' => $qty,
-            'price' => (float)$price_at_added,
-            'subtotal' => (float)$subtotal,
-            'image' => $pimage
-        ];
-        $total_subtotal += (float)$subtotal;
-    }
-    mysqli_stmt_close($stmt);
+$stmt = mysqli_prepare(
+    $mysqli,
+    "SELECT 
+        ci.id,
+        p.id,
+        p.name,
+        p.image,
+        ci.qty,
+        ci.price_at_added,
+        (ci.qty * ci.price_at_added) AS subtotal
+     FROM cart_items ci
+     JOIN products p ON p.id = ci.product_id
+     WHERE ci.cart_id = ?"
+);
+mysqli_stmt_bind_param($stmt, 'i', $cart_id);
+mysqli_stmt_execute($stmt);
+mysqli_stmt_bind_result(
+    $stmt,
+    $ci_id,
+    $product_id,
+    $pname,
+    $pimage,
+    $qty,
+    $price_at_added,
+    $subtotal
+);
+
+while (mysqli_stmt_fetch($stmt)) {
+    $items[] = [
+        'ci_id' => $ci_id,
+        'product_id' => $product_id,
+        'name' => $pname,
+        'qty' => $qty,
+        'price' => (float)$price_at_added,
+        'subtotal' => (float)$subtotal,
+        'image' => $pimage
+    ];
+    $total_subtotal += (float)$subtotal;
 }
+mysqli_stmt_close($stmt);
 
 $discount = 0.00;
 $total = $total_subtotal - $discount;
 
-function e($s) { return htmlspecialchars($s, ENT_QUOTES, 'UTF-8'); }
+function e($s) {
+    return htmlspecialchars($s, ENT_QUOTES, 'UTF-8');
+}
 ?>
 
 <!DOCTYPE html>
@@ -176,6 +189,7 @@ function e($s) { return htmlspecialchars($s, ENT_QUOTES, 'UTF-8'); }
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>URBANIX - Cart</title>
+  <link rel="stylesheet" href="CSs/stylesheet.css">
   <link rel="stylesheet" href="fontawesome-free-6.7.2-web/css/all.min.css">
   <link rel="stylesheet" href="CSS/bootstrap.min.css">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -187,13 +201,15 @@ function e($s) { return htmlspecialchars($s, ENT_QUOTES, 'UTF-8'); }
     .product-thumb { width:84px; height:84px; object-fit:cover; border-radius:8px; }
     .qty-input { width:80px; }
     .muted { color:#6c757d; }
+    .alert{background:#fff;border:1px solid #fff}
+    .cart-container .btn:hover{background:#b63f07}
     
     /* Header Styles */
     .navbar { background:#fff; box-shadow:0 2px 10px rgba(0,0,0,0.1); }
     .nav-link { color:#333 !important; font-weight:500; }
     .nav-link:hover { color:#000 !important; }
     .logo { font-weight:bold; font-size:24px; color:#000; }
-    .nav-btn { background:#000; color:#fff; border-radius:20px; }
+    .nav-btn { background:#000; color:#fff; border-radius:5px; }
     .nav-btn:hover { background:#333; color:#fff; }
     .nav-icon { font-size:20px; color:#333; }
     
@@ -258,7 +274,7 @@ function e($s) { return htmlspecialchars($s, ENT_QUOTES, 'UTF-8'); }
 
       <?php if (empty($items)): ?>
         <div class="alert alert-info">
-          Your cart is empty. <a href="products.php" class="fw-semibold">Go to products</a>
+          Your cart is empty. <a href="products.php" class="fw-semibold" style="text-decoration:none ;color:#b63f07">Go to products</a>
         </div>
       <?php else: ?>
         <?php foreach ($items as $it): ?>
@@ -308,10 +324,7 @@ function e($s) { return htmlspecialchars($s, ENT_QUOTES, 'UTF-8'); }
           <div><?= number_format($total_subtotal, 2) ?> EGP</div>
         </div>
 
-        <div class="d-flex justify-content-between mb-2">
-          <div class="muted">Discount</div>
-          <div><?= number_format($discount, 2) ?> EGP</div>
-        </div>
+      
 
         <hr>
 
@@ -321,11 +334,11 @@ function e($s) { return htmlspecialchars($s, ENT_QUOTES, 'UTF-8'); }
         </div>
 
         <div class="d-grid gap-2">
-          <a href="products.php" class="btn btn-outline-secondary">Continue Shopping</a>
+          <a href="products.php" class="btn btn-outline-secondary" >Continue Shopping</a>
           <?php if (!empty($items)): ?>
-            <a href="#" class="btn btn-primary">Checkout</a>
+            <a href="#" class="btn btn-primary" >Checkout</a>
           <?php else: ?>
-            <button class="btn btn-primary" disabled>Checkout</button>
+            <button class="btn btn-primary" disabled style="background : #b63f07;border:1px solid #b63f07; ">Checkout</button>
           <?php endif; ?>
         </div>
 

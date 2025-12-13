@@ -18,101 +18,13 @@ body{
 }
 
 
-/* ------------- Page Register----------- */
-/* hero image */
-/* .pageform {
-  height: 100%;
-  background-color: white;
-}
-
-.h3header {
-  text-align: center;
-  margin-top: -700px;
-  color: var(--accent-orange)
-}
-
-.formregister {
-  width: 450px;
-  min-height: 600px;
-  background-color: var(--black-bg);
-  border: solid 1px var(--whiteColor);
-  position: absolute;
-  top: 53%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  border-radius: 40px;
-}
-
-.h6form {
-  margin-top: 20px;
-  margin-left: 35px;
-  color: white
-}
-
-.divinput {
-  margin-left: 30px;
-}
-
-input {
-  width: 350px;
-  height: 40px;
-  margin-left: 30px;
-  border: solid 1px var(--whiteColor);
-  background-color: white;
-  border-radius: 40px;
-  padding-left: 10px;
-}
-
-.btnform {
-  width: 350px;
-  height: 40px;
-  margin-left: 30px;
-  border: 1px solid white;
-  background-color: white;
-  border-radius: 40px;
-  font-size: 20px;
-  font-weight: 40px;
-}
-
-.divspana {
-  margin-top: 30px;
-  margin-left: 100px;
-  color: var(--accent-orange)
-} */
-/* --------------------------------------------------------------------------------------- */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /* -------page Home  */
-
 a{color:inherit; text-decoration:none}
-/* div site-wapper */
+
 .site-wrapper{max-width:1180px; margin:0 auto; padding:18px}
 
-/* Header */
-/* header.site-header{
-  display:flex; align-items:center; justify-content:space-between; gap:12px; padding:14px 0;
-}
-.logo{font-weight:1000; font-size:20px; color:var(--black-bg) ;margin-left: 100px;}
-.logo:hover{font-size:22px;font-family: 'Times New Roman', Times, serif;font-weight:1000;color:var(--yellow) }   
-nav.main-nav ul{display:flex; gap:16px; list-style:none; padding:0; margin:0}
-nav.main-nav li{font-size:14px; color:var(--muted)}
-nav.main-nav li:hover{ font-size:16px}
-.cta{background:var(--accent-orange); padding:8px 14px; border-radius:6px; font-weight:700 ;color:var(--black-bg);}
-.cta:hover{ font-weight:900 } */
+
+
 
 
 :root{
@@ -148,7 +60,7 @@ h1,h2,h3{
     font-weight: 600;
     transition: var(--trans);
 }
-
+/* 
 /* Navbar */
 .navbar{
     background-color: var(--white);
@@ -162,13 +74,13 @@ h1,h2,h3{
     text-shadow: 1px 1px 17px var(--orange);
 }
 
-.nav-link{
+.navbar .nav-link{
     color: var(--text-dark);
     font-weight: 400;
     margin-right: 1rem;
     font-size: 0.9375rem;
 }
-.nav-link:hover ,
+.navbar .nav-link:hover ,
 .nav-icon:hover{
     color: var(--black);
     cursor: pointer;
@@ -178,18 +90,18 @@ h1,h2,h3{
     color: var(--text-dark);
 }
 
-.btn{
+ form .btn{
     color: var(--black);
     background-color: var(--orange);
     position: relative;
     overflow: hidden;
     font-weight: bold;
 }
-.btn:hover{
+ form .btn:hover{
       background-color: rgb(205, 74, 9);
     color: var(--text-dark);
 }
-.btn::after {
+form .btn::after {
     content: "";
     position: absolute;
     top: 0;
@@ -205,7 +117,7 @@ h1,h2,h3{
 @keyframes shine {
     to { left: 120%; }
 }
-
+ 
 
 
 /* Hero */
@@ -226,7 +138,7 @@ h1,h2,h3{
 
 /* Products */
 .products-section{padding:36px 0}
-.section-title{text-align:center; margin:18px 0 0; font-size:16px; color:var(--accent-orange)}
+.section-title{text-align:center; margin:18px 0 0; font-size:16px; color:#b63f07}
 .section-title:hover{font-size:20px;color:var(--whiteColor2) }
 .products{display:grid; grid-template-columns:repeat(4, 1fr); gap:18px;margin-top: 20px;}
 .product{background:var(--whiteColor); border-radius:8px; padding:0px; text-align:center; box-shadow:0 6px 18px rgba(11,14,19,0.04);}
@@ -283,14 +195,14 @@ transform: scale(1.1);
 .callouts{display:grid; grid-template-columns:1fr 1fr; gap:18px; margin:28px 0}
 .callout{background:rgb(205, 203, 203); padding:20px; border-radius:8px; box-shadow:0 6px 18px rgba(11,14,19,0.04);transition: transform 0.3s ease;}
  .callout:hover{transform: scale(1.03);}
-.callout .h31{margin:20px 80px}
- .callout .p1{margin-left: 70px;margin-top: 10px;}
- .callout .ctacall{margin-left: 200px;margin-top:10px ;}
-.callout .h32{margin:20px 0 0 300px}
-.callout .p2{margin-left: 300px;margin-top: 10px;}
-.callout-img{display:flex; align-items:center; justify-content:space-between; gap:12px ; background-image: url(../img/Screenshot\ 2025-11-22\ 002603.png);
+.callout .h31{margin:20px 150px}
+ .callout .p1{margin-left: 150px;margin-top: 10px;}
+ .callout .ctacall{margin-left: 250px;margin-top:10px ;}
+.callout .h32{margin:20px 0 0 500px}
+.callout .p2{margin-left: 500px;margin-top: 10px;}
+.callout-img{display:flex; align-items:center; justify-content:space-between; gap:12px ; background-image: url(../images/Screenshot\ 2025-11-22\ 002603.png);
   background-size:cover; background-position:center right ;}
-.callout .cta2{margin-left: 350px;margin-top:10px ;}
+
 
 
  
@@ -304,8 +216,7 @@ transform: scale(1.1);
 .h41{margin:-130px 0 0 450px}
 .p12{margin:20px 0 20px 400px}
 .ctanew{margin:50px 0 0px 450px}
-.cta{background:var(--accent-orange); padding:8px 14px; border-radius:6px; font-weight:700 ;color:var(--black-bg);}
-.cta:hover{ font-weight:900 }
+
 
 /* Footer */
 
@@ -347,11 +258,16 @@ transform: scale(1.1);
 
 
 /* Responsive */
-@media (max-width:1500px){ .divfooter{margin-left: 200px;margin-top: -140px;}}
-@media (max-width:1000px){.products{grid-template-columns:repeat(3, 1fr)} .hero .inner{padding:36px} .footer-content{gap:20px;margin: 0px 0px;}
-  .divfooter{margin-left: 160px;margin-top: -140px;} footer{height:400px;}  .ctanew{margin-left: -10px;}}
+@media (max-width:1500px){ .callouts{grid-template-columns:1fr}.callout .h32{margin:20px 0 0 700px}
+.callout .p2{margin-left: 700px;margin-top: 10px;}
+}
+@media (max-width:1000px){.products{grid-template-columns:repeat(3, 1fr)} .hero .inner{padding:36px} .callouts{grid-template-columns:1fr}
+    .ctanew{margin-left: -10px;}  .callout .h32{margin:20px 0 0 400px}
+.callout .p2{margin-left: 400px;margin-top: 10px;}
+}
 @media (max-width:760px){
   nav.main-nav ul{display:none}
+  .logos-container{grid-template-columns:repeat(5, 1fr)}
   .products{grid-template-columns:repeat(2, 1fr)}
   .news-row{grid-template-columns:1fr}
   .callouts{grid-template-columns:1fr}
@@ -359,18 +275,25 @@ transform: scale(1.1);
   .hero p{font-size:13px; margin-left: -10px;}
   .h41,.p12,.ctanew{margin-top: 30px;margin-left: -10px;}
   .hero .inner{padding:28px; min-height:220px; background-position:center}
-  footer{height:400px;}
-  .footer-content{gap:20px;margin: 0px 0px;}
-  .divfooter{margin-left: 160px;}
+   .callout .h32{margin:20px 0 0 400px}
+.callout .p2{margin-left: 400px;margin-top: 10px;}
+
+  
 
 }
-@media (max-width:420px){
+@media (max-width:550px){
+  .logos-container{grid-template-columns:repeat(5, 1fr)}
   .products{grid-template-columns:1fr}
   header.site-header{flex-direction:column; align-items:flex-start; gap:8px}
   .hero h1{font-size:22px;}
   .hero p{font-size:13px}
-  .footer-content{gap:20px;margin: 0px 0px;}
-  .divfooter{margin-left: 160px;}
+  .callout .h32{margin:20px 0 0 200px}
+.callout .p2{margin-left: 200px;margin-top: 10px;}
+.callout .h32{margin:20px 0 0 200px}
+.callout .p2{margin-left: 200px;margin-top: 10px;}
+
+  
+  
 }
 /* --------------------------------------------------------------------------------------------------------------------------- */
 
@@ -380,23 +303,7 @@ transform: scale(1.1);
 
 
 
-/* ----------Page cart---------- */
-.divbody{
-  color:var(--black-bg);
-  font-family: 'Times New Roman', Times, serif;
 
-}
-.cartdata{display: flex;margin-top: 130px;}
-.cartdata i{margin-top: 7px ;margin-right: 10px;font-size: 40px;color: #000;margin-left: -70px;}
-.cartdata h1:hover{color:var(--accent-orange)}
-.cartdata p{margin: 110px;text-align: center;}
-.divcart{width:400px;background-color:var(--accent-orange);height: 250px;border-radius: 10px;margin-left: 800px;margin-top: -230px;color: white;}
-.subtotal ,.total,.discount{display: flex;margin-top: 10px;margin-left: 20px;color: white;}
-.divcart p{margin-left: auto;margin-right: 50px;}
-.divcart button{width:300px;margin: 20px 50px;border:1px solid var(--yellow);background-color: white;border-radius: 5px;height: 35px;font-size: 20px;}
-
-.divcart .titleh4 h4{margin-left: 20px;}
-.cartdata i:hover{color:var(--accent-orange)}
 
 
 

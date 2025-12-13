@@ -69,7 +69,21 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             --whiteColor: #ffffff;
             --black-bg: #1a1a1a;
         }
-        body { background-color: #f5f5f5; }
+     body {
+    min-height: 100vh;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background:
+        radial-gradient(circle at 20% 20%, rgba(255, 140, 51, 0.35), transparent 40%),
+        radial-gradient(circle at 80% 80%, rgba(255, 179, 71, 0.25), transparent 45%),
+        linear-gradient(135deg, #0b0e13 0%, #141824 60%, #1a1f2b 100%);
+
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
         .register-box {
             background-color: var(--black-bg);
             border: 1px solid var(--whiteColor);

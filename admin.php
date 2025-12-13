@@ -54,8 +54,8 @@ $result = $conn->query("
         .btn-del i { color:#ff8c33; padding:2px 6px; border-radius:3px; text-decoration:none; }
         .btn-del i:hover{color:white;}
         .btn-edit i:hover{color:white;}
-        .btn-edit i {color:#ff8c33; padding:2px 6px; border-radius:3px; text-decoration:none; margin-right:20px; }
-        .btn-del i { color:#ff8c33; padding:2px 6px; border-radius:3px; text-decoration:none; }
+        .btn-edit i {color:black; padding:2px 6px; border-radius:3px; text-decoration:none; margin-right:20px; }
+        .btn-del i { color:black; padding:2px 6px; border-radius:3px; text-decoration:none; }
         .btn-del i:hover{color:white;}
         .btn-edit i:hover{color:white;}
     </style>
@@ -65,7 +65,8 @@ $result = $conn->query("
 <nav class="navbar navbar-expand-lg position-fixed top-0 end-0 start-0 border border-bottom-1 border-top-0 border-start-0 border-end-0 border-secondary">
   <div class="container-fluid">
 
-    <h5 class="me-4 mt-2 logo">URBANIX</h5>
+    <h5 class="me-4 mt-2 logo" style="font-weight: 700;color: var(--black);text-shadow: 1px 1px 17px var(--orange);
+">URBANIX</h5>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>

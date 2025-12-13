@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 11, 2025 at 04:50 AM
+-- Generation Time: Dec 13, 2025 at 03:18 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -29,7 +29,7 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `carts` (
   `id` int(11) NOT NULL,
-  `session_id` varchar(255) NOT NULL,
+  `user_id` int(11) DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -37,8 +37,12 @@ CREATE TABLE `carts` (
 -- Dumping data for table `carts`
 --
 
-INSERT INTO `carts` (`id`, `session_id`, `created_at`) VALUES
-(1, 'gcndg8rnlll3h0ln9gqg4vbne5', '2025-12-08 15:23:48');
+INSERT INTO `carts` (`id`, `user_id`, `created_at`) VALUES
+(5, NULL, '2025-12-11 18:59:59'),
+(8, NULL, '2025-12-12 20:33:27'),
+(9, 1, '2025-12-12 23:41:44'),
+(15, 3, '2025-12-12 23:49:33'),
+(16, 2, '2025-12-12 23:50:22');
 
 -- --------------------------------------------------------
 
@@ -60,11 +64,14 @@ CREATE TABLE `cart_items` (
 --
 
 INSERT INTO `cart_items` (`id`, `cart_id`, `product_id`, `qty`, `price_at_added`, `created_at`) VALUES
-(2, 1, 7, 14, 500.00, '2025-12-10 17:50:44'),
-(4, 1, 2, 1, 750.00, '2025-12-10 17:54:51'),
-(5, 1, 8, 1, 600.00, '2025-12-10 17:55:33'),
-(6, 1, 1, 2, 500.00, '2025-12-10 23:46:41'),
-(7, 1, 10, 1, 650.00, '2025-12-10 23:56:03');
+(16, 5, 4, 1, 1600.00, '2025-12-11 19:00:04'),
+(17, 5, 2, 1, 750.00, '2025-12-11 20:21:50'),
+(19, 8, 7, 1, 500.00, '2025-12-12 23:23:39'),
+(20, 8, 3, 1, 210.00, '2025-12-12 23:41:50'),
+(21, 9, 2, 1, 750.00, '2025-12-12 23:48:27'),
+(22, 15, 9, 1, 800.00, '2025-12-12 23:49:51'),
+(23, 15, 11, 1, 420.00, '2025-12-12 23:49:59'),
+(27, 16, 2, 1, 750.00, '2025-12-13 02:18:01');
 
 -- --------------------------------------------------------
 
@@ -112,6 +119,13 @@ CREATE TABLE `orders` (
   `notes` text DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `orders`
+--
+
+INSERT INTO `orders` (`order_id`, `order_number`, `user_id`, `total_price`, `discount`, `shipping_address`, `city`, `payment_method`, `status`, `notes`, `created_at`) VALUES
+(1, 'ORD20251211821051', 1, 335.00, 0, NULL, NULL, NULL, 'pending', NULL, '2025-12-11 18:44:56');
 
 -- --------------------------------------------------------
 
@@ -185,7 +199,8 @@ INSERT INTO `products` (`id`, `name`, `price`, `stock`, `is_new`, `image`, `desc
 (31, 'Mini Classic Gold White 31mm', 1335.00, 0, 0, 'images/Mini Classic Gold White 31mm.jpg', '', '2025-12-05 13:44:48'),
 (32, 'SLisbon Leather Watch', 1100.00, 0, 0, 'images/Lisbon Leather Watch.webp', '', '2025-12-05 13:44:48'),
 (33, 'Casio Vintage', 990.00, 0, 0, 'images/casio.jpg', '', '2025-12-05 13:44:48'),
-(34, 'Casio Duo Watch', 1400.00, 0, 0, 'images/Casio Duo Watch.jpg', '', '2025-12-05 13:44:48');
+(34, 'Casio Duo Watch', 1400.00, 0, 0, 'images/Casio Duo Watch.jpg', '', '2025-12-05 13:44:48'),
+(35, 'T-shirt Round', 350.00, 10, 1, 'uploads/1765452866_accessories.jpg', 'Summer', '2025-12-11 11:34:26');
 
 -- --------------------------------------------------------
 
@@ -210,7 +225,8 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`user_id`, `name`, `username`, `email`, `password`, `role`, `created_at`, `updated_at`) VALUES
 (1, 'Admin', 'admin', 'admin@admin.com', '$2y$10$wS0SfAmZTeVOcpxfolpPH.AJpL.q3j44nyCggJsC7Xmx7Ij9n7kPW', 'admin', '2025-12-05 15:23:46', '2025-12-11 03:16:39'),
-(2, 'mohamed', 'mohamed', 'mo@gmail.com', '$2y$10$5SL.tSok30AXfCMRuGZlde98Q9vbSX9pRI3NbT6LdIp/duGsGas8K', 'user', '2025-12-11 03:42:57', '2025-12-11 03:42:57');
+(2, 'mohamed', 'mohamed', 'mo@gmail.com', '$2y$10$5SL.tSok30AXfCMRuGZlde98Q9vbSX9pRI3NbT6LdIp/duGsGas8K', 'user', '2025-12-11 03:42:57', '2025-12-11 03:42:57'),
+(3, 'ahmed', 'Ahmed', 'ahmed@gmail.com', '$2y$10$1ZYUY58V17ra52oJXlM0geZV51qZNxseuCO9gwvN6bcDahU2QEZL2', 'user', '2025-12-11 11:38:07', '2025-12-11 11:38:07');
 
 --
 -- Indexes for dumped tables
@@ -221,7 +237,8 @@ INSERT INTO `users` (`user_id`, `name`, `username`, `email`, `password`, `role`,
 --
 ALTER TABLE `carts`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `session_id` (`session_id`);
+  ADD UNIQUE KEY `user_id` (`user_id`),
+  ADD UNIQUE KEY `user_id_2` (`user_id`);
 
 --
 -- Indexes for table `cart_items`
@@ -275,13 +292,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `carts`
 --
 ALTER TABLE `carts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `cart_items`
 --
 ALTER TABLE `cart_items`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT for table `contact_messages`
@@ -293,7 +310,7 @@ ALTER TABLE `contact_messages`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `order_items`
@@ -305,17 +322,23 @@ ALTER TABLE `order_items`
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `carts`
+--
+ALTER TABLE `carts`
+  ADD CONSTRAINT `fk_carts_user` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE SET NULL ON UPDATE CASCADE;
 
 --
 -- Constraints for table `cart_items`
