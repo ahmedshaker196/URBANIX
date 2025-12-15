@@ -1,16 +1,18 @@
 <?php
 require_once 'config/db.php';
 
+if (!isset($_GET['id'])) {
+    die("Product ID not provided");
+}
 
-if(!isset($_GET['id'])) die("Product ID not provided");
-$product_id = $_GET['id'];
+$product_id = (int) $_GET['id'];
 
+$stmt = $conn->prepare("DELETE FROM products WHERE id = ?");
+$stmt->bind_param("i", $product_id);
+$stmt->execute();
 
-$conn->query("DELETE FROM product_images WHERE product_id=$product_id");
+$stmt->close();
 
-
-$conn->query("DELETE FROM products WHERE product_id=$product_id");
-
-header("Location: admin.php"); 
+header("Location: admin.php");
 exit;
 ?>
