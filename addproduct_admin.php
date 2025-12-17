@@ -130,28 +130,27 @@ require_once 'config/db.php';
 <?php
 if (isset($_POST['save_product'])) {
 
-    $name        = $_POST['name'];
-    $description = $_POST['description'];
+    $name        = mysqli_real_escape_string($conn, $_POST['name']);
+    $description = mysqli_real_escape_string($conn, $_POST['description']);
     $price       = $_POST['price'];
     $stock       = $_POST['stock'];
     $is_new      = isset($_POST['is_new']) ? 1 : 0;
 
-    $targetDir = "uploads/";
-    if (!is_dir($targetDir)) {
-        mkdir($targetDir, 0777, true);
-    }
+      $myimage  = $_FILES['image'];
+    $filename = $myimage['name'];        
+    $tempname = $myimage['tmp_name'];   
+    $size     = $myimage['size'];
 
-    $fileName   = time() . "_" . basename($_FILES["image"]["name"]);
-    $targetFile = $targetDir . $fileName;
+     $folder = "uploads/" . $filename; 
 
-    if (move_uploaded_file($_FILES["image"]["tmp_name"], $targetFile)) {
+    if (move_uploaded_file($tempname, $folder)) {
 
         $sql = "
             INSERT INTO products (name, description, price, stock, is_new, image)
-            VALUES ('$name', '$description', '$price', '$stock', '$is_new', '$targetFile')
+            VALUES ('$name', '$description', '$price', '$stock', '$is_new', '$folder')
         ";
 
-        if ($conn->query($sql)) {
+        if (mysqli_query($conn,$sql)) {
             echo "<p style='color:green; text-align:center; margin-top:15px;'>
                     Product added successfully!
                   </p>";
