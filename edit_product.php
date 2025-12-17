@@ -5,14 +5,20 @@ require_once 'config/db.php';
    GET PRODUCT ID
 ========================= */
 if (!isset($_GET['id'])) die("Product ID not provided");
-$product_id = (int) $_GET['id'];
+$product_id =  $_GET['id'];
 
 /* =========================
    Fetch Product
 ========================= */
-$product_res = $conn->query("SELECT * FROM products WHERE id = $product_id");
-if ($product_res->num_rows == 0) die("Product not found");
-$product = $product_res->fetch_assoc();
+$sql="SELECT * FROM products WHERE id = $product_id";
+$product_res = mysqli_query($conn, $sql);
+
+if (mysqli_num_rows($product_res) == 0) {
+    die("Product not found");
+}
+
+$product = mysqli_fetch_assoc($product_res);
+
 
 /* =========================
    UPDATE PRODUCT
@@ -28,16 +34,20 @@ if (isset($_POST['update_product'])) {
     /* Image Upload */
     if (isset($_FILES['image']) && $_FILES['image']['tmp_name']) {
 
-        $targetDir = "uploads/";
-        if (!is_dir($targetDir)) mkdir($targetDir, 0777, true);
+    $myimage  = $_FILES['image'];
+    $filename = $myimage['name'];        
+    $tempname = $myimage['tmp_name'];    
+    $size     = $myimage['size'];        
+    $folder = "uploads/" . $filename;
 
-        $fileName   = time() . "_" . basename($_FILES["image"]["name"]);
-        $targetFile = $targetDir . $fileName;
-
-        if (move_uploaded_file($_FILES["image"]["tmp_name"], $targetFile)) {
-            $conn->query("UPDATE products SET image='$targetFile' WHERE id=$product_id");
-        }
+     if (move_uploaded_file($tempname, $folder)) {
+        $sql="UPDATE products SET image='$folder' WHERE id=$product_id";
+        mysqli_query($conn,$sql);
+    } else {
+        echo "Error uploading image.";
     }
+    }
+
 
     /* Update Product */
     $sql = "
@@ -50,11 +60,14 @@ if (isset($_POST['update_product'])) {
         WHERE id=$product_id
     ";
 
-    if ($conn->query($sql)) {
+    if (mysqli_query($conn,$sql)) {
         echo "<p style='color:green; text-align:center;'>Product updated successfully!</p>";
-        $product = $conn->query("SELECT * FROM products WHERE id = $product_id")->fetch_assoc();
+        $product_res = mysqli_query($conn,"SELECT * FROM products WHERE id = $product_id");
+         $product = mysqli_fetch_assoc($product_res);
     } else {
-        echo "<p style='color:red;'>Error: {$conn->error}</p>";
+
+        echo "<p style='color:red;'>Error: " . mysqli_error($conn) . "</p>";
+
     }
 }
 ?>
@@ -141,12 +154,12 @@ if (isset($_POST['update_product'])) {
 
             <div class="form-group">
                 <label>Product Name</label>
-                <input type="text" name="name" value="<?= htmlspecialchars($product['name']) ?>" required>
+                <input type="text" name="name" value="<?= $product['name'] ?>" required>
             </div>
 
             <div class="form-group">
                 <label>Description</label>
-                <textarea name="description" required><?= htmlspecialchars($product['description']) ?></textarea>
+                <textarea name="description" required><?= $product['description'] ?></textarea>
             </div>
 
             <div class="form-group">
